@@ -40,5 +40,21 @@ def main(event,context):
 
     logging.info("E - N - D")
 
+
+# Define a sample event
+event = {
+    "key1": "value1",
+    "key2": "value2"
+}
+
+# Define a sample context
+class Context:
+    def __init__(self):
+        self.aws_request_id = "123456789"
+        self.log_group_name = "/aws/lambda/my-function"
+        # Define other context attributes as needed
+
+context = Context()
+
 if __name__ == '__main__':
     main(event,context)
