@@ -8,7 +8,7 @@ from sklearn.preprocessing import StandardScaler
 from algo import symmetrized_KLD
 from helpers import write
 #from concurrent.futures import ProcessPoolExecutor
-from concurrent.futures import ThreadPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 import numpy as np
 import pandas as pd
 from copy import deepcopy
@@ -224,23 +224,7 @@ def sockpuppet_distance(
     cdist_ = np.zeros((total_rows, matrix2.shape[0]))
     print("3333333")
 
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        print("*************************")
-        futures = []
-        for start_row in range(0, total_rows, block_size):
-            end_row = min(start_row + block_size, total_rows)
-            block1 = matrix1[start_row:end_row]
-            for start_col in range(start_row, matrix2.shape[0], block_size):
-                end_col = min(start_col + block_size, matrix2.shape[0])
-                block2 = matrix2[start_col:end_col]
-                future = executor.submit(calculate_block_distance, block1, block2)
-                futures.append((future, start_row, end_row, start_col, end_col))
-
-        for future, start_row, end_row, start_col, end_col in futures:
-            block_distances = future.result()
-            cdist_[start_row:end_row, start_col:end_col] = block_distances
-
-    # with ProcessPoolExecutor(max_workers=4) as executor:
+    # with ThreadPoolExecutor(max_workers=2) as executor:
     #     print("*************************")
     #     futures = []
     #     for start_row in range(0, total_rows, block_size):
@@ -255,6 +239,22 @@ def sockpuppet_distance(
     #     for future, start_row, end_row, start_col, end_col in futures:
     #         block_distances = future.result()
     #         cdist_[start_row:end_row, start_col:end_col] = block_distances
+
+    with ProcessPoolExecutor(max_workers=4) as executor:
+        print("*************************")
+        futures = []
+        for start_row in range(0, total_rows, block_size):
+            end_row = min(start_row + block_size, total_rows)
+            block1 = matrix1[start_row:end_row]
+            for start_col in range(start_row, matrix2.shape[0], block_size):
+                end_col = min(start_col + block_size, matrix2.shape[0])
+                block2 = matrix2[start_col:end_col]
+                future = executor.submit(calculate_block_distance, block1, block2)
+                futures.append((future, start_row, end_row, start_col, end_col))
+
+        for future, start_row, end_row, start_col, end_col in futures:
+            block_distances = future.result()
+            cdist_[start_row:end_row, start_col:end_col] = block_distances
 
     # Make the matrix symmetric
     cdist_ = np.triu(cdist_) + np.triu(cdist_, 1).T
