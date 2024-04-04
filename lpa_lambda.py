@@ -11,7 +11,7 @@ def main(event,context):
     alt.data_transformers.disable_max_rows()
     
     logging.info("1.Reading frequency data...")
-    freq = pd.read_csv('test_data/test_freq.csv')
+    freq = pd.read_csv('test_data/freq-orig.csv')
 
     logging.info("  Data loaded successfully.")
     
