@@ -217,7 +217,7 @@ def sockpuppet_distance(
         matrices.append(matrix)
 
     matrix1, matrix2 = matrices
-    block_size = 500
+    block_size = 1000
 
     # Initialize distance matrix
     total_rows = matrix1.shape[0]
@@ -240,7 +240,7 @@ def sockpuppet_distance(
     #         block_distances = future.result()
     #         cdist_[start_row:end_row, start_col:end_col] = block_distances
 
-    with ProcessPoolExecutor(max_workers=10) as executor:
+    with ProcessPoolExecutor(max_workers=8) as executor:
         print("*************************")
         futures = []
         for start_row in range(0, total_rows, block_size):
