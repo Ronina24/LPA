@@ -217,7 +217,7 @@ def sockpuppet_distance(
         matrices.append(matrix)
 
     matrix1, matrix2 = matrices
-    block_size = 700
+    block_size = 1000
 
     # Initialize distance matrix
     total_rows = matrix1.shape[0]
