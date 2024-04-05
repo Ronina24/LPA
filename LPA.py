@@ -240,7 +240,7 @@ def sockpuppet_distance(
     #         block_distances = future.result()
     #         cdist_[start_row:end_row, start_col:end_col] = block_distances
 
-    with ProcessPoolExecutor(max_workers=4) as executor:
+    with ProcessPoolExecutor(max_workers=10) as executor:
         print("*************************")
         futures = []
         for start_row in range(0, total_rows, block_size):
