@@ -11,7 +11,7 @@ def main(event,context):
     alt.data_transformers.disable_max_rows()
     
     logging.info("1.Reading frequency data...")
-    freq = pd.read_csv('test_data/freq-orig.csv')
+    freq = pd.read_csv('test_data/test_freq.csv')
 
     logging.info("  Data loaded successfully.")
     
@@ -35,13 +35,15 @@ def main(event,context):
     filtered_spd = spd[spd['value'] > 0].sort_values(by='value', ascending=True)
     # print(spd)
     print(filtered_spd)
-    num_rows = filtered_spd.shape[0]  
-    print(f"Number of rows in the filtered DataFrame: {num_rows}")
+    #num_rows = filtered_spd.shape[0]  
+    #print(f"Number of rows in the filtered DataFrame: {num_rows}")
+    with open("filtered_data_stats.txt", "w") as stats_file:
+        num_rows = filtered_spd.shape[0]
+        stats_file.write(f"Number of rows in the filtered DataFrame: {num_rows}\n")
+
 
     logging.info("E - N - D")
 
-
-# Define a sample event
 event = {
     "key1": "value1",
     "key2": "value2"
