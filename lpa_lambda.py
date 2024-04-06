@@ -4,7 +4,7 @@ import logging
 from LPA import PCA, Corpus, sockpuppet_distance
 
 
-def main(event,context):
+def main():
     logging.basicConfig(filename='progress_log.txt', level=logging.INFO, 
                         format='%(asctime)s %(levelname)s:%(message)s')
 
@@ -59,4 +59,4 @@ class Context:
 context = Context()
 
 if __name__ == '__main__':
-    main(event,context)
+    main()
