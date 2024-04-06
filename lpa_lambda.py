@@ -38,26 +38,13 @@ def main(freq_file_path):
     print(filtered_spd)
     #num_rows = filtered_spd.shape[0]  
     #print(f"Number of rows in the filtered DataFrame: {num_rows}")
-    with open("filtered_data_stats.txt", "w") as stats_file:
+    with open("filtered_data_stats.txt", "w") as filtered_spd_file:
         num_rows = filtered_spd.shape[0]
-        stats_file.write(f"Number of rows in the filtered DataFrame: {num_rows}\n")
+        filtered_spd_file.write(f"Number of rows in the filtered DataFrame: {num_rows}\n")
 
 
     logging.info("E - N - D")
 
-event = {
-    "key1": "value1",
-    "key2": "value2"
-}
-
-# Define a sample context
-class Context:
-    def __init__(self):
-        self.aws_request_id = "123456789"
-        self.log_group_name = "/aws/lambda/my-function"
-        # Define other context attributes as needed
-
-context = Context()
 
 if __name__ == '__main__':
     if len(sys.argv) < 2:
