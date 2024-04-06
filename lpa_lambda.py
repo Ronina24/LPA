@@ -39,8 +39,8 @@ def main(freq_file_path):
     #num_rows = filtered_spd.shape[0]  
     #print(f"Number of rows in the filtered DataFrame: {num_rows}")
     with open("filtered_data_stats.txt", "w") as filtered_spd_file:
-        num_rows = filtered_spd.shape[0]
-        filtered_spd_file.write(f"Number of rows in the filtered DataFrame: {num_rows}\n")
+        #num_rows = filtered_spd.shape[0]
+        filtered_spd_file.write(filtered_spd)
 
 
     logging.info("E - N - D")
