@@ -17,3 +17,58 @@
 7  C00003  C001d4  0.747798
 8  C001d4  C001d4  0.000000
 2024-04-07 00:16:23,927 INFO:E - N - D
+2024-04-07 00:24:58,783 INFO:1.Reading frequency data...
+2024-04-07 00:24:58,792 INFO:  Data loaded successfully.
+2024-04-07 00:24:58,792 INFO:2. Creating DVR from the corpus...
+2024-04-07 00:24:58,802 INFO:DVR created.
+2024-04-07 00:24:58,802 INFO:Epsilon calculated: 0.041666666666666664
+2024-04-07 00:24:58,802 INFO:Creating signatures...
+2024-04-07 00:24:58,803 INFO:Signatures created.
+2024-04-07 00:24:58,803 INFO:Calculating sockpuppet distance...
+2024-04-07 00:25:01,427 INFO:Sockpuppet distance calculated    Corpus Corpus      value
+0  C00001  C00001  0.000000
+1  C00003  C00001  1.000000
+2  C001d4  C00001  0.913819
+3  C00001  C00003  1.000000
+4  C00003  C00003  0.000000
+5  C001d4  C00003  0.747798
+6  C00001  C001d4  0.913819
+7  C00003  C001d4  0.747798
+8  C001d4  C001d4  0.000000
+2024-04-07 00:26:24,243 INFO:1.Reading frequency data...
+2024-04-07 00:26:24,246 INFO:  Data loaded successfully.
+2024-04-07 00:26:24,246 INFO:2. Creating DVR from the corpus...
+2024-04-07 00:26:24,250 INFO:DVR created.
+2024-04-07 00:26:24,250 INFO:Epsilon calculated: 0.041666666666666664
+2024-04-07 00:26:24,250 INFO:Creating signatures...
+2024-04-07 00:26:24,251 INFO:Signatures created.
+2024-04-07 00:26:24,251 INFO:Calculating sockpuppet distance...
+2024-04-07 00:26:26,946 INFO:Sockpuppet distance calculated    Corpus Corpus      value
+0  C00001  C00001  0.000000
+1  C00003  C00001  1.000000
+2  C001d4  C00001  0.913819
+3  C00001  C00003  1.000000
+4  C00003  C00003  0.000000
+5  C001d4  C00003  0.747798
+6  C00001  C001d4  0.913819
+7  C00003  C001d4  0.747798
+8  C001d4  C001d4  0.000000
+2024-04-07 00:26:26,965 INFO:E - N - D
+2024-04-07 00:27:52,739 INFO:1.Reading frequency data...
+2024-04-07 00:27:52,742 INFO:  Data loaded successfully.
+2024-04-07 00:27:52,743 INFO:2. Creating DVR from the corpus...
+2024-04-07 00:27:52,746 INFO:DVR created.
+2024-04-07 00:27:52,747 INFO:Epsilon calculated: 0.041666666666666664
+2024-04-07 00:27:52,747 INFO:Creating signatures...
+2024-04-07 00:27:52,748 INFO:Signatures created.
+2024-04-07 00:27:52,748 INFO:Calculating sockpuppet distance...
+2024-04-07 00:27:57,017 INFO:Sockpuppet distance calculated    Corpus Corpus      value
+0  C00001  C00001  0.000000
+1  C00003  C00001  1.000000
+2  C001d4  C00001  0.913819
+3  C00001  C00003  1.000000
+4  C00003  C00003  0.000000
+5  C001d4  C00003  0.747798
+6  C00001  C001d4  0.913819
+7  C00003  C001d4  0.747798
+8  C001d4  C001d4  0.000000
