@@ -2,16 +2,17 @@ import altair as alt
 import pandas as pd
 import logging
 from LPA import PCA, Corpus, sockpuppet_distance
+import sys
 
 
-def main():
+def main(freq_file_path):
     logging.basicConfig(filename='progress_log.txt', level=logging.INFO, 
                         format='%(asctime)s %(levelname)s:%(message)s')
 
     alt.data_transformers.disable_max_rows()
     
     logging.info("1.Reading frequency data...")
-    freq = pd.read_csv('test_data/test_freq.csv')
+    freq = pd.read_csv(freq_file_path)
 
     logging.info("  Data loaded successfully.")
     
@@ -59,4 +60,8 @@ class Context:
 context = Context()
 
 if __name__ == '__main__':
-    main()
+    if len(sys.argv) < 2:
+        print("Usage: python script.py <freq_file_path>")
+        sys.exit(1)
+    freq_file_path = sys.argv[1]
+    main(freq_file_path)
