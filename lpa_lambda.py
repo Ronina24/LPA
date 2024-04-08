@@ -34,15 +34,7 @@ def main(freq_file_path):
     spd = sockpuppet_distance(corpus, corpus)
     logging.info(f"Sockpuppet distance calculated {spd}")
     filtered_spd = spd[spd['value'] > 0].sort_values(by='value', ascending=True)
-    # print(spd)
-    print(filtered_spd)
-    #num_rows = filtered_spd.shape[0]  
-    #print(f"Number of rows in the filtered DataFrame: {num_rows}")
-    with open("filtered_data_stats.txt", "w") as filtered_spd_file:
-        filtered_spd_file.write(filtered_spd.to_csv(index=False))
-
-
-    logging.info("E - N - D")
+    return filtered_spd
 
 
 if __name__ == '__main__':
