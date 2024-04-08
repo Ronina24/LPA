@@ -222,26 +222,8 @@ def sockpuppet_distance(
     # Initialize distance matrix
     total_rows = matrix1.shape[0]
     cdist_ = np.zeros((total_rows, matrix2.shape[0]))
-    print("3333333")
-
-    # with ThreadPoolExecutor(max_workers=2) as executor:
-    #     print("*************************")
-    #     futures = []
-    #     for start_row in range(0, total_rows, block_size):
-    #         end_row = min(start_row + block_size, total_rows)
-    #         block1 = matrix1[start_row:end_row]
-    #         for start_col in range(start_row, matrix2.shape[0], block_size):
-    #             end_col = min(start_col + block_size, matrix2.shape[0])
-    #             block2 = matrix2[start_col:end_col]
-    #             future = executor.submit(calculate_block_distance, block1, block2)
-    #             futures.append((future, start_row, end_row, start_col, end_col))
-
-    #     for future, start_row, end_row, start_col, end_col in futures:
-    #         block_distances = future.result()
-    #         cdist_[start_row:end_row, start_col:end_col] = block_distances
 
     with ProcessPoolExecutor(max_workers=10) as executor:
-        print("*************************")
         futures = []
         for start_row in range(0, total_rows, block_size):
             end_row = min(start_row + block_size, total_rows)
@@ -266,6 +248,7 @@ def sockpuppet_distance(
     # Construct DataFrame
     c1n = getattr(corpus1, "name", "Corpus 1")
     c2n = getattr(corpus2, "name", "Corpus 2")
+    print("distances calculation completed")
     df = pd.DataFrame(cdist_, index=corpus1.document_cat.categories, columns=corpus2.document_cat.categories)
 
     if res == "table":
