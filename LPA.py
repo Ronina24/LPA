@@ -197,6 +197,9 @@ class Corpus:
             columns=self.element_cat.categories,
         )
         res = self._signature_matrix(sig_length, distances_df)
+        print("Signatures matrix has been created:")
+        for df in res:
+            print(df.head(10))  # Print the first 10 rows of each DataFrame
         return res
 
 

@@ -25,16 +25,17 @@ def main(freq_file_path):
     epsilon = 1 / (len(dvr) * epsilon_frac)
     logging.info(f"Epsilon calculated: {epsilon}")
 
-    logging.info("Creating signatures...")
+    print("Creating signatures...")
     signatures = corpus.create_signatures(epsilon=epsilon, sig_length=500, distance="KLDe")
     logging.info("Signatures created.")
 
 
-    logging.info("Calculating sockpuppet distance...")
+    print("Calculating sockpuppet distance...")
     spd = sockpuppet_distance(corpus, corpus)
+    spd = spd.drop_duplicates(subset='value', keep='first').sort_values(by='value',ascending=True)
     logging.info(f"Sockpuppet distance calculated {spd}")
     filtered_spd = spd[spd['value'] > 0].sort_values(by='value', ascending=True)
-    filtered_spd.columns = ['Corpus1', 'Corpus2', 'Distance']
+    filtered_spd.columns = ['Corpus1', 'Corpus2', 'Distance']    
     return filtered_spd
 
 
