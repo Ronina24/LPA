@@ -35,7 +35,7 @@ def main(freq_file_path):
     spd = spd.drop_duplicates(subset='value', keep='first').sort_values(by='value',ascending=True)
     logging.info(f"Sockpuppet distance calculated {spd}")
     filtered_spd = spd[spd['value'] > 0].sort_values(by='value', ascending=True)
-    filtered_spd.columns = ['Corpus1', 'Corpus2', 'Distance']    
+    filtered_spd.columns = ['Corpus 1', 'Corpus 2', 'Distance']    
     return filtered_spd
 
 
