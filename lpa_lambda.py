@@ -34,7 +34,8 @@ def main(freq_file_path):
     spd = sockpuppet_distance(corpus, corpus)
     logging.info(f"Sockpuppet distance calculated {spd}")
     filtered_spd = spd[spd['value'] > 0].sort_values(by='value', ascending=True)
-    return filtered_spd
+    filtered_spd.columns = ['Corpus1', 'Corpus2', 'Distance']
+    print (filtered_spd)
 
 
 if __name__ == '__main__':
