@@ -6,7 +6,9 @@ import sys
 
 
 def main(freq_file_path,metadata):
-    print(metadata)
+
+    sig_length_metadata = int(metadata['signature'])
+    threshold_metadata = int(metadata['threshold'])
     logging.basicConfig(filename='progress_log.txt', level=logging.INFO, 
                         format='%(asctime)s %(levelname)s:%(message)s')
 
@@ -14,8 +16,6 @@ def main(freq_file_path,metadata):
     
     logging.info("1.Reading frequency data...")
     freq = pd.read_csv(freq_file_path)
-
-    logging.info("  Data loaded successfully.")
     
     logging.info("2. Creating DVR from the corpus...")
     corpus = Corpus(freq=freq, name='Corpus')
@@ -26,17 +26,18 @@ def main(freq_file_path,metadata):
     epsilon = 1 / (len(dvr) * epsilon_frac)
     logging.info(f"Epsilon calculated: {epsilon}")
 
-    print("Creating signatures...")
-    signatures = corpus.create_signatures(epsilon=epsilon, sig_length=500, distance="KLDe")
+    print("Creating signatures of length: ", sig_length_metadata)
+    signatures = corpus.create_signatures(epsilon=epsilon, sig_length=sig_length_metadata, distance="KLDe")
     logging.info("Signatures created.")
 
 
-    print("Calculating sockpuppet distance...")
+    print("Calculating sockpuppet distance with threshold of: ",threshold_metadata)
     spd = sockpuppet_distance(corpus, corpus)
     spd = spd.drop_duplicates(subset='value', keep='first').sort_values(by='value',ascending=True)
     logging.info(f"Sockpuppet distance calculated {spd}")
-    filtered_spd = spd[spd['value'] > 0].sort_values(by='value', ascending=True)
+    filtered_spd = spd[spd['value'] > threshold_metadata].sort_values(by='value', ascending=True)
     filtered_spd.columns = ['Corpus 1', 'Corpus 2', 'value']    
+    print("Finished calculate sockpuppet distance- check results file in the results bucket")
     return filtered_spd
 
 
@@ -45,4 +46,5 @@ if __name__ == '__main__':
         print("Usage: python script.py <freq_file_path>")
         sys.exit(1)
     freq_file_path = sys.argv[1]
+    metadata = sys.argv[2]
     main(freq_file_path,metadata)
