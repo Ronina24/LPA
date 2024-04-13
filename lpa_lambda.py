@@ -8,7 +8,7 @@ import sys
 def main(freq_file_path,metadata):
 
     sig_length_metadata = int(metadata['signature'])
-    threshold_metadata = int(metadata['threshold'])
+    threshold_metadata = float(metadata['threshold'])
     logging.basicConfig(filename='progress_log.txt', level=logging.INFO, 
                         format='%(asctime)s %(levelname)s:%(message)s')
 
