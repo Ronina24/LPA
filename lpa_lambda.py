@@ -5,7 +5,8 @@ from LPA import PCA, Corpus, sockpuppet_distance
 import sys
 
 
-def main(freq_file_path):
+def main(freq_file_path,metadata):
+    print(metadata)
     logging.basicConfig(filename='progress_log.txt', level=logging.INFO, 
                         format='%(asctime)s %(levelname)s:%(message)s')
 
@@ -35,7 +36,7 @@ def main(freq_file_path):
     spd = spd.drop_duplicates(subset='value', keep='first').sort_values(by='value',ascending=True)
     logging.info(f"Sockpuppet distance calculated {spd}")
     filtered_spd = spd[spd['value'] > 0].sort_values(by='value', ascending=True)
-    filtered_spd.columns = ['Corpus 1', 'Corpus 2', 'Value']    
+    filtered_spd.columns = ['Corpus 1', 'Corpus 2', 'value']    
     return filtered_spd
 
 
@@ -44,4 +45,4 @@ if __name__ == '__main__':
         print("Usage: python script.py <freq_file_path>")
         sys.exit(1)
     freq_file_path = sys.argv[1]
-    main(freq_file_path)
+    main(freq_file_path,metadata)
