@@ -8,7 +8,7 @@ import sys
 def main(freq_file_path,metadata):
 
     sig_length_metadata = int(metadata['signature'])
-    threshold_metadata = float(metadata['threshold'])
+    #threshold_metadata = float(metadata['threshold'])
     logging.basicConfig(filename='progress_log.txt', level=logging.INFO, 
                         format='%(asctime)s %(levelname)s:%(message)s')
 
@@ -31,11 +31,11 @@ def main(freq_file_path,metadata):
     logging.info("Signatures created.")
 
 
-    print("Calculating sockpuppet distance with threshold of: ",threshold_metadata)
+    print("Calculating sockpuppet distance with signature length of: ",sig_length_metadata)
     spd = sockpuppet_distance(corpus, corpus)
     spd = spd.drop_duplicates(subset='value', keep='first').sort_values(by='value',ascending=True)
     logging.info(f"Sockpuppet distance calculated {spd}")
-    filtered_spd = spd[spd['value'] > threshold_metadata].sort_values(by='value', ascending=True)
+    filtered_spd = spd.sort_values(by='value', ascending=True)
     filtered_spd.columns = ['Corpus 1', 'Corpus 2', 'value']    
     print("Finished calculate sockpuppet distance- check results file in the results bucket")
     return filtered_spd
