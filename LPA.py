@@ -1,17 +1,20 @@
 from __future__ import annotations
+
+#from concurrent.futures import ProcessPoolExecutor
+from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
+from copy import deepcopy
 from importlib import import_module
 from pathlib import Path
 from typing import List, Literal, Tuple
+
+import numpy as np
+import pandas as pd
+from algo import symmetrized_KLD
+from helpers import write
 from scipy.spatial.distance import cdist
 from sklearn import decomposition as skd
 from sklearn.preprocessing import StandardScaler
-from algo import symmetrized_KLD
-from helpers import write
-#from concurrent.futures import ProcessPoolExecutor
-from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
-import numpy as np
-import pandas as pd
-from copy import deepcopy
+
 
 class Matrix:
     def __init__(self, matrix: np.array):
@@ -285,3 +288,15 @@ def prepare_for_visualization(spd_matrix):
     spd_long = spd_matrix.melt(id_vars=spd_matrix.columns[0], var_name='element', value_name='value')
     spd_long.rename(columns={spd_matrix.columns[0]: 'document'}, inplace=True)
     return spd_long
+
+def sockpuppet_below_average_filter(df, deviation_factor: int = 1):
+    print('Filtering out values below the average minus the standard deviation multiplied by the deviation factor')
+    avg_value = df['value'].mean()
+    std_dev = df['value'].std()
+    print(f'Average: {avg_value}')
+    print(f'Standard Deviation: {std_dev}')
+    print(f'Average - {deviation_factor} * Standard Deviation: {avg_value - deviation_factor * std_dev}')
+
+    filtered_df = df[df['value'] < avg_value - deviation_factor * std_dev]
+
+    return filtered_df[['Corpus 1', 'Corpus 2', 'value']]

@@ -1,8 +1,10 @@
+import logging
+import sys
+
 import altair as alt
 import pandas as pd
-import logging
-from LPA import PCA, Corpus, sockpuppet_distance
-import sys
+
+from LPA import PCA, Corpus, sockpuppet_below_average_filter, sockpuppet_distance
 
 
 def main(freq_file_path,metadata):
@@ -37,8 +39,13 @@ def main(freq_file_path,metadata):
     logging.info(f"Sockpuppet distance calculated {spd}")
     filtered_spd = spd.sort_values(by='value', ascending=True)
     filtered_spd.columns = ['Corpus 1', 'Corpus 2', 'value']    
-    print("Finished calculate sockpuppet distance- check results file in the results bucket")
-    return filtered_spd
+    print("Finished calculate sockpuppet distance")
+    
+    deviation_factor = 1 # Value to be set from 1 - 4
+    sockpuppet_below_average = sockpuppet_below_average_filter(filtered_spd, deviation_factor)
+    
+    print("Calculation finished - Check results file in the results bucket")
+    return sockpuppet_below_average
 
 
 if __name__ == '__main__':
