@@ -295,8 +295,8 @@ def sockpuppet_below_average_filter(df, deviation_factor: int = 1):
     std_dev = df['value'].std()
     print(f'Average: {avg_value}')
     print(f'Standard Deviation: {std_dev}')
-    print(f'Average - {deviation_factor} * Standard Deviation: {avg_value - deviation_factor * std_dev}')
+    print(f'Threshold = Average + ( deviation_factor * Standard Deviation ): {avg_value + deviation_factor * std_dev}')
 
-    filtered_df = df[df['value'] < avg_value - deviation_factor * std_dev]
+    filtered_df = df[df['value'] < avg_value + deviation_factor * std_dev]
 
     return filtered_df[['Corpus 1', 'Corpus 2', 'value']]
